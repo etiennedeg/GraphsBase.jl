@@ -31,7 +31,6 @@ An abstract type representing a single edge between two vertices of a graph.
 - `U`: Weight type
 """
 abstract type AbstractEdge{V, U} end
-# abstract type AbstractWeightedEdge{V, U} <: AbstractEdge{V} end
 
 """
     AbstractEdgeIter
@@ -106,6 +105,13 @@ Return true if edge e1 is less than edge e2 in lexicographic order.
 isless(v1::AbstractEdge , v2::AbstractEdge) = _NI("src")
 
 ==(e1::AbstractEdge, e2::AbstractEdge) = _NI("==")
+
+"""
+    eltype(e)
+
+Return the type of the edge's vertices
+"""
+eltype(::Type{<:ET}) where {ET<:AbstractEdge{V}} where {V} = V
 
 """
     src(e)

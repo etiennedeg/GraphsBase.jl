@@ -1,6 +1,8 @@
 import Base: Pair, Tuple, show, ==, hash, isless
 import GraphsBase: AbstractEdge, src, dst
 
+is_vertex(::Type{<:Integer}) = true
+
 struct SimpleEdge{T<:Integer} <: AbstractSimpleEdge{T}
     src::T
     dst::T

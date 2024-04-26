@@ -1,9 +1,6 @@
-"""
-    AbstractPathState
-
-An abstract type that provides information from shortest paths calculations.
-"""
-abstract type AbstractPathState end
+# Conversions
+Pair(e::AbstractEdge) = Pair(src(e), dst(e))
+Tuple(e::AbstractEdge) = (src(e), dst(e))
 
 """
     is_ordered(e)

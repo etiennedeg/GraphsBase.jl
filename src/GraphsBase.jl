@@ -16,7 +16,7 @@ is_directed, IsDirected, is_range_based, IsRangeBased, is_simply_mutable, IsSimp
 is_mutable, IsMutable, is_weight_mutable, IsWeightMutable, is_vertex_stable, IsVertexStable,
 has_vertex, has_edge, inneighbors, outneighbors, outedges, inedges,
 weight, get_vertex_container, get_edge_container,
-Edge, Graph, SimpleGraph, SimpleGraphFromIterator, DiGraph, SimpleDiGraphFromIterator,
+Edge, WeightedEdge, Graph, DiGraph, SimpleGraph, SimpleGraphFromIterator, SimpleDiGraphFromIterator,
 SimpleDiGraph,
 
 # core
@@ -52,7 +52,9 @@ GraphsBase
 include("interface.jl")
 include("utils.jl")
 include("core.jl")
+include("Graphs/Graphs.jl")
 include("SimpleGraphs/SimpleGraphs.jl")
+include("Test/Test.jl")
 
 using .SimpleGraphs
 """
