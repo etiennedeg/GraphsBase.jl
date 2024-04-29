@@ -32,11 +32,15 @@ show(io::IO, e::Edge) = print(io, "Edge $(e.src) => $(e.dst)")
 show(io::IO, e::WeightedEdge) = print(io, "Edge $(e.src) => $(e.dst) with weight $(e.weight)")
 
 Edge(e::AbstractEdge) where {T<:Integer} = Edge(e.src, e.dst)
+WeightedEdge(e::AbstractEdge, w) where {T<:Integer} = Edge(e.src, e.dst, w)
 
 # Convenience functions
-reverse(e::T) where {T<:AbstractSimpleEdge} = T(dst(e), src(e))
+reverse(e::Edge) = Edge(dst(e), src(e))
+reverse(e::WeightedEdge) = Edge(dst(e), src(e), w)
 function ==(e1::AbstractSimpleEdge, e2::AbstractSimpleEdge)
     return (src(e1) == src(e2) && dst(e1) == dst(e2))
 end
-hash(e::AbstractSimpleEdge, h::UInt) = hash(src(e), hash(dst(e), h))
-isless(e1::AbstractSimpleEdge, e2::AbstractSimpleEdge) = (src(e1) < src(e2)) || ((src(e1) == src(e2)) && (dst(e1) < dst(e2)))
+hash(e::Edge, h::UInt) = hash(src(e), hash(dst(e), h))
+hash(e::WeightedEdge, h::UInt) = hash(src(e), hash(dst(e), hash(weight(e), h)))
+isless(e1::Edge, e2::Edge) = (src(e1) < src(e2)) || ((src(e1) == src(e2)) && (dst(e1) < dst(e2)))
+

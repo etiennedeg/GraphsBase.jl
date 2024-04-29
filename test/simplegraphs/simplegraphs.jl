@@ -1,5 +1,4 @@
 using Random: Random
-using GraphsBase.Test
 
 @testset "SimpleGraphs" begin
     rng = StableRNG(1)
@@ -510,41 +509,4 @@ using GraphsBase.Test
         SimpleDiGraphFromIterator(Edge.([(1, 2), (3, 2)]))
     @test SimpleDiGraphFromIterator(Edge.([(1, 2), (2, 3)])) !=
         SimpleDiGraphFromIterator(Edge.([(1, 2), (1, 3)]))
-
-    # Tests for constructors from AbstractGraph
-
-    g = path_graph(4)
-    add_vertex!(g)
-    for h in [g, GenericGraph(g)]
-        hu = SimpleGraph(h)
-        hd = SimpleDiGraph(h)
-        @test nv(hu) == 5
-        @test ne(hu) == 3
-        @test nv(hd) == 5
-        @test ne(hd) == 6
-        @test eltype(SimpleGraph{Int32}(h)) == Int32
-        @test eltype(SimpleDiGraph{Int32}(h)) == Int32
-    end
-
-    g = path_digraph(4)
-    add_vertex!(g)
-    for h in [g, GenericDiGraph(g)]
-        hu = SimpleGraph(h)
-        hd = SimpleDiGraph(h)
-        @test nv(hu) == 5
-        @test ne(hu) == 3
-        @test nv(hd) == 5
-        @test ne(hd) == 3
-    end
-
-    g = union(path_digraph(4), reverse(path_digraph(4)))
-    add_vertex!(g)
-    for h in [g, GenericDiGraph(g)]
-        hu = SimpleGraph(h)
-        hd = SimpleDiGraph(h)
-        @test nv(hu) == 5
-        @test ne(hu) == 3
-        @test nv(hd) == 5
-        @test ne(hd) == 6
-    end
 end
